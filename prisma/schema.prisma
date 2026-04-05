@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UpcomingEvent {
+  id               String   @id @default(uuid())
+  title            String
+  date             String
+  time             String
+  location         String
+  description      String   @db.Text
+  image            String   @db.Text
+  registrationLink String?  @db.Text
+  createdAt        DateTime @default(now())
+}
+
+model PastSession {
+  id               String   @id @default(uuid())
+  title            String
+  date             String
+  time             String
+  location         String
+  description      String   @db.Text
+  image            String   @db.Text
+  registrationLink String?  @db.Text
+  createdAt        DateTime @default(now())
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  message   String   @db.Text
+  date      String
+  time      String
+  status    String   @default("Pending")
+  createdAt DateTime @default(now())
+}
+
+model ClientLogo {
+  id        String   @id @default(uuid())
+  name      String
+  image     String   @db.Text
+  createdAt DateTime @default(now())
+}
+
+model AvailabilityConfig {
+  id        String   @id @default(uuid())
+  dateKey   String   // e.g. "2024-04-15"
+  timeSlot  String   // e.g. "09:00 AM"
+  createdAt DateTime @default(now())
+  
+  @@unique([dateKey, timeSlot])
+}
