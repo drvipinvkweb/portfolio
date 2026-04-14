@@ -21,7 +21,7 @@ export default function AdminLogos() {
   const [formData, setFormData] = useState<Partial<LogoItem>>({});
 
   if (!isClient) return null;
-
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.image) return;

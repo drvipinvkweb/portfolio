@@ -87,7 +87,7 @@ export default function BookAppointmentSection() {
           viewport={{ once: true }}
           className="text-4xl md:text-5xl font-bold"
         >
-          Book an <span className="text-primary">Appointment</span>
+          Let&apos;s Build Something <span className="text-primary italic">That Works.</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -96,7 +96,8 @@ export default function BookAppointmentSection() {
           transition={{ delay: 0.1 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto"
         >
-          Select a date from the calendar below to schedule a 1-on-1 consulting session, mentorship call, or general inquiry.
+          If you&apos;re serious about building or scaling your business, let&apos;s talk. 
+          Select a date to schedule your strategy consultation.
         </motion.p>
       </div>
 

@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 
 const links = [
   { name: "Home", href: "#home" },
-  { name: "Upcoming Events", href: "#upcoming-events" },
-  { name: "Past Sessions", href: "#past-sessions" },
-  { name: "Book Appointment", href: "#book-appointment" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Approach", href: "#approach" },
+  { name: "Impact", href: "#impact" },
+  { name: "Book Consultation", href: "#book-appointment" },
 ];
 export default function Navbar() {
   const pathname = usePathname();
