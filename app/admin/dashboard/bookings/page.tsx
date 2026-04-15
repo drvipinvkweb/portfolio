@@ -29,12 +29,17 @@ export default async function AdminBookingsPage() {
             </div>
           )}
           
-          <Button asChild variant={isConnected ? "outline" : "default"} className={!isConnected ? "bg-primary hover:bg-primary/90" : ""}>
-            <Link href="/api/auth/google">
-              <Calendar className="w-4 h-4 mr-2" />
-              {isConnected ? "Reconnect Calendar" : "Connect Google Calendar"}
-            </Link>
-          </Button>
+          <Link 
+            href="/api/auth/google" 
+            className={cn(
+              buttonVariants({ variant: isConnected ? "outline" : "default" }), 
+              "rounded-full font-bold h-10 px-6 ml-auto flex items-center gap-2",
+              !isConnected ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""
+            )}
+          >
+            <Calendar className="w-4 h-4" />
+            {isConnected ? "Reconnect Calendar" : "Connect Google Calendar"}
+          </Link>
         </div>
       </div>
 
