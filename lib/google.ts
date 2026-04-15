@@ -66,15 +66,15 @@ export async function getAuthorizedClient() {
 
   // Check if token is expired and refresh if necessary
   if (Date.now() >= Number(tokenRecord.expiryDate)) {
-    const { tokens } = await oauth2Client.refreshToken(tokenRecord.refreshToken);
+    const { credentials } = await oauth2Client.refreshAccessToken();
     await prisma.googleToken.update({
       where: { id: 'google-token' },
       data: {
-        accessToken: tokens.access_token!,
-        expiryDate: tokens.expiry_date!,
+        accessToken: credentials.access_token!,
+        expiryDate: credentials.expiry_date!,
       },
     });
-    oauth2Client.setCredentials(tokens);
+    oauth2Client.setCredentials(credentials);
   }
 
   return oauth2Client;
