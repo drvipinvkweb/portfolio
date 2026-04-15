@@ -6,7 +6,8 @@ import { motion } from "framer-motion";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { useLocalStorage, BookingItem } from "@/lib/hooks";
+import { useLocalStorage } from "@/lib/hooks";
+import { createBooking } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -30,7 +31,6 @@ export default function BookAppointmentSection() {
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [selectedTime, setSelectedTime] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [bookings, setBookings] = useLocalStorage<BookingItem[]>("admin_bookings", []);
   const [availability, , isClient] = useLocalStorage<Record<string, string[]>>("admin_date_availability", {});
 
   const handleDateSelect = (newDate: Date | undefined) => {
@@ -42,8 +42,10 @@ export default function BookAppointmentSection() {
 
   const currentSlots = date ? availability[format(date, "yyyy-MM-dd")] || [] : [];
 
-  const handleBooking = (e: React.FormEvent) => {
+  const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!date || !selectedTime) return;
+
     const form = e.target as HTMLFormElement;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
@@ -52,28 +54,30 @@ export default function BookAppointmentSection() {
 
     setIsSubmitting(true);
     
-    // Simulate booking API call & save to local storage
-    setTimeout(() => {
-      setBookings((prev) => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          name,
-          email,
-          phone,
-          message,
-          date: date ? format(date, "MMM dd, yyyy") : "",
-          time: selectedTime || "",
-          status: "Pending"
-        }
-      ]);
-      
+    try {
+      const result = await createBooking({
+        name,
+        email,
+        phone,
+        message,
+        date: format(date, "MMM dd, yyyy"),
+        time: selectedTime,
+      });
+
+      if (result.success) {
+        setIsSheetOpen(false);
+        setDate(undefined);
+        setSelectedTime(null);
+        alert("Appointment successfully booked! A confirmation email has been sent.");
+      } else {
+        alert("Failed to book appointment. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setIsSheetOpen(false);
-      setDate(undefined);
-      setSelectedTime(null);
-      alert("Appointment successfully booked!");
-    }, 1000);
+    }
   };
 
   if (!isClient) return <section id="book-appointment" className="space-y-12 px-6 pt-24 pb-12 min-h-screen" />;

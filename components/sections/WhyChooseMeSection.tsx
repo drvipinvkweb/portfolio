@@ -5,23 +5,23 @@ import { Zap, Target, Layers, UserPlus } from "lucide-react";
 
 const reasons = [
   {
-    title: "Execution Focused",
-    description: "I don't just provide strategy decks. I help you build the systems and processes that actually get the work done.",
+    title: "Execution-Focused",
+    description: "I don't just believe in strategy decks. I work on ground-level execution, systems, and measurable growth.",
     icon: <Zap className="w-6 h-6 text-primary" />
   },
   {
     title: "Founder Mindset",
-    description: "Having built and scaled my own ventures, I understand the real-world challenges founders face daily.",
+    description: "Hands-on experience in building and scaling ventures with a focus on real-world results, not just advice.",
     icon: <Target className="w-6 h-6 text-primary" />
   },
   {
     title: "Zero Templates",
-    description: "Every business is unique. I build customized solutions tailored to your specific market, team, and goals.",
+    description: "No generic consulting models—every solution is customized to your unique business problem and scale.",
     icon: <Layers className="w-6 h-6 text-primary" />
   },
   {
     title: "Direct Involvement",
-    description: "I work closely with your leadership team, becoming a strategic partner in your business growth journey.",
+    description: "I work closely with founders and leadership teams to solve real obstacles in strategy and execution.",
     icon: <UserPlus className="w-6 h-6 text-primary" />
   }
 ];

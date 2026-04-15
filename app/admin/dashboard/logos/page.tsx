@@ -21,11 +21,11 @@ export default function AdminLogos() {
   const [formData, setFormData] = useState<Partial<LogoItem>>({});
 
   if (!isClient) return null;
- 
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.image) return;
-    
+
     setLogos((prev) => [
       ...prev,
       {
@@ -40,10 +40,10 @@ export default function AdminLogos() {
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if(file) {
+    if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData({...formData, image: reader.result as string});
+        setFormData({ ...formData, image: reader.result as string });
       };
       reader.readAsDataURL(file);
     }
@@ -60,7 +60,7 @@ export default function AdminLogos() {
           <h1 className="text-3xl font-bold tracking-tight text-white">Client Logos</h1>
           <p className="text-muted-foreground">Manage the infinite scrolling logos bar.</p>
         </div>
-        
+
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger className="inline-flex items-center justify-center bg-primary text-primary-foreground h-9 px-4 py-2 rounded-md font-medium text-sm">
             Add Logo
@@ -72,7 +72,7 @@ export default function AdminLogos() {
             <form onSubmit={handleSubmit} className="space-y-4 pt-4">
               <div className="space-y-2">
                 <Label>Company Name</Label>
-                <Input required className="bg-background" value={formData.name || ""} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                <Input required className="bg-background" value={formData.name || ""} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
               </div>
               <div className="space-y-2">
                 <Label>Logo Image (Select File)</Label>
@@ -87,12 +87,12 @@ export default function AdminLogos() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {logos.map((logo) => (
           <div key={logo.id} className="bg-[#1a1a1a] border border-[#333] rounded-xl p-6 flex flex-col items-center gap-4 relative group">
-             <button 
-                onClick={() => handleDelete(logo.id)}
-                className="absolute top-2 right-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white p-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                Delete
-              </button>
+            <button
+              onClick={() => handleDelete(logo.id)}
+              className="absolute top-2 right-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white p-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              Delete
+            </button>
             <div className="h-12 w-full flex items-center justify-center">
               <img src={logo.image} alt={logo.name} className="max-h-full max-w-full object-contain filter brightness-0 invert" />
             </div>

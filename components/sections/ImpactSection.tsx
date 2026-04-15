@@ -86,23 +86,27 @@ export default function ImpactSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="flex gap-6 p-8 rounded-[2rem] bg-card/30 border border-white/5 hover:bg-card/50 transition-all duration-300 group"
+              className="group relative p-10 rounded-[2.5rem] bg-card/30 border border-white/5 hover:border-primary/20 transition-all duration-500 overflow-hidden"
             >
-              <div className="w-16 h-16 shrink-0 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                {impact.icon}
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
-                    {impact.title}
-                  </h4>
-                  <span className="text-primary font-bold bg-primary/10 px-3 py-1 rounded-full text-xs tracking-wider">
-                    {impact.metric}
-                  </span>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors duration-500" />
+              
+              <div className="flex flex-col sm:flex-row gap-8 relative z-10">
+                <div className="w-16 h-16 shrink-0 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                  {impact.icon}
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {impact.description}
-                </p>
+                <div className="space-y-4 flex-1">
+                  <div className="flex items-center justify-between gap-4">
+                    <h4 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
+                      {impact.title}
+                    </h4>
+                    <span className="shrink-0 text-primary font-bold bg-primary/10 px-4 py-1.5 rounded-full text-xs tracking-widest border border-primary/20">
+                      {impact.metric}
+                    </span>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed text-lg">
+                    {impact.description}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

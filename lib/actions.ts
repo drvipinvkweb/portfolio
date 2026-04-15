@@ -6,6 +6,9 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient };
 export const prisma = globalForPrisma.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
+import { createCalendarEvent, sendConfirmationEmail } from "./google";
+import { revalidatePath } from "next/cache";
+
 export async function syncUpcomingEvents(data: any[]) {
   try {
     await prisma.upcomingEvent.deleteMany({});
@@ -89,5 +92,64 @@ export async function getAvailability() {
     return result;
   } catch (error) {
     return null;
+  }
+}
+
+export async function createBooking(data: {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  date: string;
+  time: string;
+}) {
+  try {
+    const booking = await prisma.booking.create({
+      data: {
+        ...data,
+        status: "Pending",
+      },
+    });
+
+    // Try to create Google Calendar event
+    await createCalendarEvent(data);
+
+    // Try to send confirmation email
+    await sendConfirmationEmail({
+      name: data.name,
+      email: data.email,
+      date: data.date,
+      time: data.time
+    });
+
+    revalidatePath("/admin/dashboard/bookings");
+    return { success: true, booking };
+  } catch (error) {
+    console.error("Error creating booking:", error);
+    return { success: false, error: "Failed to create booking" };
+  }
+}
+
+export async function updateBookingStatus(id: string, status: string) {
+  try {
+    await prisma.booking.update({
+      where: { id },
+      data: { status },
+    });
+    revalidatePath("/admin/dashboard/bookings");
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+}
+
+export async function getGoogleConnectionStatus() {
+  try {
+    const token = await prisma.googleToken.findUnique({
+      where: { id: "google-token" },
+    });
+    return !!token;
+  } catch (error) {
+    return false;
   }
 }

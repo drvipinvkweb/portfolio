@@ -59,3 +59,11 @@ model AvailabilityConfig {
   
   @@unique([dateKey, timeSlot])
 }
+model GoogleToken {
+  id           String   @id @default("google-token")
+  accessToken  String   @db.Text
+  refreshToken String   @db.Text
+  expiryDate   BigInt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
