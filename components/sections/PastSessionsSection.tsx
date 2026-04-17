@@ -12,8 +12,8 @@ const defaultSessions: SessionItem[] = [
   { id: "3", title: "Generative AI in Education", date: "Jun 10, 2026", time: "9:30 AM EST", location: "EdTech World", description: "Keynote presentation detailing the transformative role of AI tutors in hybrid learning environments.", image: "/event_poster_1.png" },
 ];
 
-export default function PastSessionsSection() {
-  const [pastEvents, , isClient] = useLocalStorage<SessionItem[]>("admin_past_sessions", defaultSessions);
+export default function PastSessionsSection({ initialSessions = [] }: { initialSessions?: SessionItem[] }) {
+  const [pastEvents, , isClient] = useLocalStorage<SessionItem[]>("admin_past_sessions", initialSessions.length > 0 ? initialSessions : defaultSessions);
 
   if (!isClient) return <section id="past-sessions" className="space-y-12 px-6 pt-24 pb-12 min-h-[80vh]" />;
 

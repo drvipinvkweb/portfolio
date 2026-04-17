@@ -12,8 +12,8 @@ const defaultLogos: LogoItem[] = [
   { id: "5", name: "Meta", image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
 ];
 
-export default function LogosSection() {
-  const [logos, , isClient] = useLocalStorage<LogoItem[]>("admin_client_logos", defaultLogos);
+export default function LogosSection({ initialLogos = [] }: { initialLogos?: LogoItem[] }) {
+  const [logos, , isClient] = useLocalStorage<LogoItem[]>("admin_client_logos", initialLogos.length > 0 ? initialLogos : defaultLogos);
 
   if (!isClient || logos.length === 0) return null;
 

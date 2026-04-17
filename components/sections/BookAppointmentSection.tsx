@@ -21,17 +21,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const DEFAULT_TIME_SLOTS = [
-  "09:00 AM", "10:00 AM", "11:30 AM", 
-  "01:00 PM", "02:30 PM", "04:00 PM"
+const BASE_SLOTS = [
+  "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"
 ];
 
-export default function BookAppointmentSection() {
+export default function BookAppointmentSection({ initialAvailability = {} }: { initialAvailability?: Record<string, string[]> }) {
   const [date, setDate] = React.useState<Date | undefined>();
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [selectedTime, setSelectedTime] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [availability, , isClient] = useLocalStorage<Record<string, string[]>>("admin_date_availability", {});
+  const [availability, , isClient] = useLocalStorage<Record<string, string[]>>("admin_date_availability", initialAvailability);
 
   const handleDateSelect = (newDate: Date | undefined) => {
     if (newDate) {
@@ -40,7 +39,21 @@ export default function BookAppointmentSection() {
     }
   };
 
-  const currentSlots = date ? availability[format(date, "yyyy-MM-dd")] || [] : [];
+  const getAvailableSlots = (d: Date) => {
+    // Sunday check
+    if (d.getDay() === 0) return [];
+
+    const dateKey = format(d, "yyyy-MM-dd");
+    const customSlots = availability[dateKey];
+
+    // If custom config exists for this date, use it
+    if (customSlots && customSlots.length > 0) return customSlots;
+    
+    // Default to 3 PM - 9 PM
+    return BASE_SLOTS;
+  };
+
+  const currentSlots = date ? getAvailableSlots(date) : [];
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -122,11 +135,13 @@ export default function BookAppointmentSection() {
             day_outside: "text-muted-foreground opacity-50",
           }}
           disabled={(d) => {
-            // Disable dates in the past
-            return d < new Date();
+            // Disable dates in the past or Sundays
+            return d < new Date() || d.getDay() === 0;
           }}
         />
-        <p className="text-xs text-muted-foreground text-center">Note: Only dates configured in the admin panel will display available times.</p>
+        <p className="text-xs text-muted-foreground text-center">
+          Available Mon-Sat: 3:00 PM - 9:00 PM unless specifically booked or blocked.
+        </p>
       </motion.div>
 
       <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>

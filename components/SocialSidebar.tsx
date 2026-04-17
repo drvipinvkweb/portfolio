@@ -47,10 +47,13 @@ export default function SocialSidebar() {
         </a>
       </div>
 
-      <div className="h-12 w-px bg-border my-2" />
-
-      <div className="writing-vertical-lr rotate-180 text-sm tracking-widest text-muted-foreground uppercase font-medium">
-        Follow Me
+      <div className="flex flex-col items-center gap-8">
+        <div className="h-16 w-px bg-gradient-to-b from-white/20 to-transparent" />
+        <div className="relative h-24 w-4 flex items-center justify-center">
+          <span className="-rotate-90 absolute whitespace-nowrap text-[10px] font-bold tracking-[0.5em] text-muted-foreground/40 uppercase select-none hover:text-primary transition-all duration-300 transform-gpu cursor-default">
+            Follow Me
+          </span>
+        </div>
       </div>
     </motion.div>
   );

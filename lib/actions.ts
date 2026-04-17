@@ -9,6 +9,7 @@ export async function syncUpcomingEvents(data: any[]) {
   try {
     await prisma.upcomingEvent.deleteMany({});
     if (data.length > 0) await prisma.upcomingEvent.createMany({ data });
+    revalidatePath("/");
   } catch (e) {
     console.error(e);
   }
@@ -16,13 +17,14 @@ export async function syncUpcomingEvents(data: any[]) {
 
 export async function getUpcomingEvents() {
   try { return await prisma.upcomingEvent.findMany({ orderBy: { createdAt: 'desc' } }); } 
-  catch (e) { return null; }
+  catch (e) { return []; }
 }
 
 export async function syncPastSessions(data: any[]) {
   try {
     await prisma.pastSession.deleteMany({});
     if (data.length > 0) await prisma.pastSession.createMany({ data });
+    revalidatePath("/");
   } catch (e) {
     console.error(e);
   }
@@ -30,7 +32,7 @@ export async function syncPastSessions(data: any[]) {
 
 export async function getPastSessions() {
   try { return await prisma.pastSession.findMany({ orderBy: { createdAt: 'desc' } }); } 
-  catch (e) { return null; }
+  catch (e) { return []; }
 }
 
 export async function syncBookings(data: any[]) {
@@ -44,13 +46,14 @@ export async function syncBookings(data: any[]) {
 
 export async function getBookings() {
   try { return await prisma.booking.findMany({ orderBy: { createdAt: 'desc' } }); } 
-  catch (e) { return null; }
+  catch (e) { return []; }
 }
 
 export async function syncClientLogos(data: any[]) {
   try {
     await prisma.clientLogo.deleteMany({});
     if (data.length > 0) await prisma.clientLogo.createMany({ data });
+    revalidatePath("/");
   } catch (e) {
     console.error(e);
   }
@@ -58,7 +61,7 @@ export async function syncClientLogos(data: any[]) {
 
 export async function getClientLogos() {
   try { return await prisma.clientLogo.findMany({ orderBy: { createdAt: 'desc' } }); } 
-  catch (e) { return null; }
+  catch (e) { return []; }
 }
 
 export async function syncAvailability(data: Record<string, string[]>) {
@@ -71,6 +74,7 @@ export async function syncAvailability(data: Record<string, string[]>) {
       }
     }
     if (rows.length > 0) await prisma.availabilityConfig.createMany({ data: rows });
+    revalidatePath("/");
   } catch (e) {
     console.error(e);
   }

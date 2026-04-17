@@ -13,8 +13,8 @@ const defaultEvents: EventItem[] = [
   { id: "3", title: "Founder's Pitch Clinic", date: "Nov 15, 2026", time: "4:00 PM EST", location: "Online", description: "Live feedback session on startup pitch decks with seasoned investors and founders.", image: "/event_poster_1.png" },
 ];
 
-export default function UpcomingEventsSection() {
-  const [upcomingEvents, , isClient] = useLocalStorage<EventItem[]>("admin_upcoming_events", defaultEvents);
+export default function UpcomingEventsSection({ initialEvents = [] }: { initialEvents?: EventItem[] }) {
+  const [upcomingEvents, , isClient] = useLocalStorage<EventItem[]>("admin_upcoming_events", initialEvents.length > 0 ? initialEvents : defaultEvents);
 
   if (!isClient) return <section id="upcoming-events" className="space-y-12 px-6 pt-24 pb-12 min-h-[80vh]" />;
 
