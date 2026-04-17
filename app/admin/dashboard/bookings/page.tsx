@@ -1,5 +1,5 @@
 import { getBookings, getGoogleConnectionStatus } from "@/lib/actions";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { cn } from "@/lib/utils";
 import { Calendar, CheckCircle2, XCircle } from "lucide-react";
 import BookingsTable from "./BookingsTable";
