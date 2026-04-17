@@ -5,17 +5,15 @@ import ApproachSection from "@/components/sections/ApproachSection";
 import TargetAudienceSection from "@/components/sections/TargetAudienceSection";
 import ImpactSection from "@/components/sections/ImpactSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
-import PastSessionsSection from "@/components/sections/PastSessionsSection";
 import LogosSection from "@/components/sections/LogosSection";
 import WhyChooseMeSection from "@/components/sections/WhyChooseMeSection";
 import BookAppointmentSection from "@/components/sections/BookAppointmentSection";
 import Footer from "@/components/Footer";
-import { getUpcomingEvents, getPastSessions, getClientLogos, getAvailability } from "@/lib/actions";
+import { getUpcomingEvents, getClientLogos, getAvailability } from "@/lib/actions";
 
 export default async function Home() {
-  const [upcomingEvents, pastSessions, clientLogos, availability] = await Promise.all([
+  const [upcomingEvents, clientLogos, availability] = await Promise.all([
     getUpcomingEvents(),
-    getPastSessions(),
     getClientLogos(),
     getAvailability()
   ]);
@@ -29,7 +27,6 @@ export default async function Home() {
       <TargetAudienceSection />
       <ImpactSection />
       <UpcomingEventsSection initialEvents={upcomingEvents || []} />
-      <PastSessionsSection initialSessions={pastSessions || []} />
       <LogosSection initialLogos={clientLogos || []} />
       <WhyChooseMeSection />
       <BookAppointmentSection initialAvailability={availability || {}} />
@@ -37,4 +34,5 @@ export default async function Home() {
     </div>
   );
 }
+
 

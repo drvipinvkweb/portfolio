@@ -40,7 +40,6 @@ export default function AdminDashboardLayout({
   const links = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Upcoming Events", href: "/admin/dashboard/upcoming-events", icon: Calendar },
-    { name: "Past Sessions", href: "/admin/dashboard/past-sessions", icon: Search },
     { name: "Client Logos", href: "/admin/dashboard/logos", icon: Users },
     { name: "Bookings", href: "/admin/dashboard/bookings", icon: Users },
     { name: "Availability", href: "/admin/dashboard/availability", icon: Clock },

@@ -20,20 +20,7 @@ export async function getUpcomingEvents() {
   catch (e) { return []; }
 }
 
-export async function syncPastSessions(data: any[]) {
-  try {
-    await prisma.pastSession.deleteMany({});
-    if (data.length > 0) await prisma.pastSession.createMany({ data });
-    revalidatePath("/");
-  } catch (e) {
-    console.error(e);
-  }
-}
 
-export async function getPastSessions() {
-  try { return await prisma.pastSession.findMany({ orderBy: { createdAt: 'desc' } }); } 
-  catch (e) { return []; }
-}
 
 export async function syncBookings(data: any[]) {
   try {
