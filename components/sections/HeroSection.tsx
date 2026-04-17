@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 export default function HeroSection() {
   return (
-    <section id="home" className="min-h-screen flex flex-col md:flex-row items-center justify-between gap-12 px-6 pt-32 pb-20 relative">
+    <section id="home" className="min-h-screen flex flex-col md:flex-row items-center justify-between gap-12 px-6 pt-32 mobile:pt-40 pb-20 relative">
       <div className="absolute top-1/4 -left-20 w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full -z-10" />
       
       <motion.div
@@ -23,7 +23,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-[0.2em] uppercase text-primary"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-primary"
           >
             Strategy & Execution Partner
           </motion.div>
@@ -32,9 +32,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-7xl md:text-9xl font-extrabold tracking-tighter text-white leading-none"
+            className="text-5xl sm:text-7xl md:text-9xl font-extrabold tracking-tighter text-white leading-[0.9] sm:leading-none text-center md:text-left"
           >
-            Where <span className="text-primary">Strategy</span> <br />
+            Where <span className="text-primary">Strategy</span> <br className="hidden sm:block" />
             Meets <span className="text-primary">Execution.</span>
           </motion.h1>
           

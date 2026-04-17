@@ -59,8 +59,8 @@ export default function Navbar() {
           opacity: isScrolled ? 1 : 0 
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 bg-card/80 backdrop-blur-md rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.5)] border border-border/40 overflow-x-auto max-w-full pointer-events-auto"
-        style={{ pointerEvents: isScrolled ? 'auto' : 'none' }}
+        className="flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 bg-card/80 backdrop-blur-md rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.5)] border border-border/40 overflow-x-auto max-w-full pointer-events-auto snap-x snap-mandatory scrollbar-hide"
+        style={{ pointerEvents: isScrolled ? 'auto' : 'none', scrollbarWidth: 'none' }}
       >
         {links.map((link) => {
           const isActive = activeSection === link.href;

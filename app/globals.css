@@ -108,10 +108,25 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Mobile Smoothing */
+@media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    overscroll-behavior-y: none;
+  }
+  .smooth-scroll-container {
+    -webkit-overflow-scrolling: touch;
   }
 }
