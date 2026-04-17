@@ -12,8 +12,21 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Vipin VK | Technologist & Startup Mentor",
-  description: "Personal brand website for Vipin VK (Founder & CEO of STEM Cadets, Startup Mentor, STEM Consultant, Technologist)",
+  title: "DR | Business and Startup Consultant",
+  description: "Official portfolio of Vipin VK (DR), a leading Technologist, Startup Mentor, and Business Consultant specialized in scaling operations and precision execution across India and the Middle East.",
+  keywords: ["Vipin VK", "DR", "Startup Mentor", "Business Consultant", "Technologist", "Business Strategy", "Execution Partner", "Startup Growth"],
+  authors: [{ name: "Vipin VK" }],
+  openGraph: {
+    title: "DR | Business and Startup Consultant",
+    description: "Clarify your direction, execute with precision, and scale your business sustainably with Vipin VK.",
+    type: "website",
+    url: "https://drvipinvk.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DR | Business and Startup Consultant",
+    description: "Clarify your direction, execute with precision, and scale your business sustainably.",
+  },
 };
 
 export default function RootLayout({
