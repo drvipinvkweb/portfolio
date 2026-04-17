@@ -90,8 +90,34 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, isClient] as const;
 }
 
-export type EventItem = { id: string; title: string; date: string; time: string; location: string; description: string; image: string; registrationLink?: string | null; createdAt?: Date | string; };
-export type SessionItem = { id: string; title: string; date: string; time: string; location: string; description: string; image: string; registrationLink?: string | null; createdAt?: Date | string; };
-export type BookingItem = { id: string; name: string; email: string; phone: string; message: string; date: string; time: string; status: "Pending" | "Confirmed" | "Cancelled"; createdAt?: Date | string; };
-export type LogoItem = { id: string; name: string; image: string; createdAt?: Date | string; };
+export type EventItem = { 
+  id: string; 
+  title: string; 
+  date: string; 
+  time: string; 
+  location: string; 
+  description: string; 
+  image: string; 
+  registrationLink?: string | null | any; 
+  createdAt?: any; 
+};
+
+export type BookingItem = { 
+  id: string; 
+  name: string; 
+  email: string; 
+  phone: string; 
+  message: string; 
+  date: string; 
+  time: string; 
+  status: "Pending" | "Confirmed" | "Cancelled" | string; 
+  createdAt?: any; 
+};
+
+export type LogoItem = { 
+  id: string; 
+  name: string; 
+  image: string; 
+  createdAt?: any; 
+};
 

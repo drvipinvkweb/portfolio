@@ -12,12 +12,17 @@ import Footer from "@/components/Footer";
 import { getUpcomingEvents, getClientLogos, getAvailability, getBookings } from "@/lib/actions";
 
 export default async function Home() {
-  const [upcomingEvents, clientLogos, availability, bookings] = await Promise.all([
+  const [rawEvents, rawLogos, availability, rawBookings] = await Promise.all([
     getUpcomingEvents(),
     getClientLogos(),
     getAvailability(),
     getBookings()
   ]);
+
+  // Type-safe mapping for the front-end
+  const upcomingEvents = (rawEvents || []).map(e => ({ ...e, registrationLink: e.registrationLink || undefined }));
+  const clientLogos = rawLogos || [];
+  const bookings = (rawBookings || []).map(b => ({ ...b, status: b.status as any }));
 
   return (
     <div className="flex flex-col gap-0 pb-0">
@@ -27,12 +32,12 @@ export default async function Home() {
       <ApproachSection />
       <TargetAudienceSection />
       <ImpactSection />
-      <UpcomingEventsSection initialEvents={upcomingEvents || []} />
-      <LogosSection initialLogos={clientLogos || []} />
+      <UpcomingEventsSection initialEvents={upcomingEvents} />
+      <LogosSection initialLogos={clientLogos} />
       <WhyChooseMeSection />
       <BookAppointmentSection 
         initialAvailability={availability || {}} 
-        initialBookings={bookings || []}
+        initialBookings={bookings}
       />
       <Footer />
     </div>
