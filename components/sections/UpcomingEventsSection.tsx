@@ -87,7 +87,12 @@ export default function UpcomingEventsSection({ initialEvents = [] }: { initialE
               
               <CardFooter className="p-6 pt-0 mt-auto">
                 {event.registrationLink ? (
-                  <a href={event.registrationLink} target="_blank" rel="noopener noreferrer" className="w-full">
+                  <a 
+                    href={event.registrationLink.startsWith('http') ? event.registrationLink : `https://${event.registrationLink}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full"
+                  >
                     <Button variant="outline" className="w-full border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground group">
                       Reserve a Spot
                       <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>

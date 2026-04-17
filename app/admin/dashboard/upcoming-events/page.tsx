@@ -118,24 +118,40 @@ export default function AdminUpcomingEvents() {
               <TableHead className="text-neutral-400">Title</TableHead>
               <TableHead className="text-neutral-400">Date/Time</TableHead>
               <TableHead className="text-neutral-400">Location</TableHead>
+              <TableHead className="text-neutral-400">Link</TableHead>
               <TableHead className="text-neutral-400 text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {events.length === 0 ? (
               <TableRow className="border-[#333] hover:bg-white/5">
-                <TableCell colSpan={4} className="text-center text-muted-foreground">No events found.</TableCell>
+                <TableCell colSpan={5} className="text-center text-muted-foreground">No events found.</TableCell>
               </TableRow>
-            ) : events.map((event) => (
-              <TableRow key={event.id} className="border-[#333] hover:bg-white/5">
-                <TableCell className="font-medium">{event.title}</TableCell>
-                <TableCell>{event.date} {event.time && `• ${event.time}`}</TableCell>
-                <TableCell>{event.location}</TableCell>
-                <TableCell className="text-right">
-                  <Button variant="destructive" size="sm" onClick={() => handleDelete(event.id)}>Delete</Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            ) : events.map((event) => {
+              const absoluteLink = event.registrationLink 
+                ? (event.registrationLink.startsWith('http') ? event.registrationLink : `https://${event.registrationLink}`)
+                : null;
+                
+              return (
+                <TableRow key={event.id} className="border-[#333] hover:bg-white/5">
+                  <TableCell className="font-medium">{event.title}</TableCell>
+                  <TableCell>{event.date} {event.time && `• ${event.time}`}</TableCell>
+                  <TableCell>{event.location}</TableCell>
+                  <TableCell>
+                    {absoluteLink ? (
+                      <a href={absoluteLink} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-xs flex items-center gap-1">
+                        View Link
+                      </a>
+                    ) : (
+                      <span className="text-neutral-500 text-xs italic">No link</span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button variant="destructive" size="sm" onClick={() => handleDelete(event.id)}>Delete</Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>
