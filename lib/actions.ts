@@ -2,7 +2,6 @@
 
 import { prisma } from "./db";
 
-import { createCalendarEvent, sendConfirmationEmail } from "./google";
 import { revalidatePath } from "next/cache";
 
 export async function syncUpcomingEvents(data: any[]) {
@@ -98,17 +97,6 @@ export async function createBooking(data: {
       },
     });
 
-    // Try to create Google Calendar event
-    await createCalendarEvent(data);
-
-    // Try to send confirmation email
-    await sendConfirmationEmail({
-      name: data.name,
-      email: data.email,
-      date: data.date,
-      time: data.time
-    });
-
     revalidatePath("/admin/dashboard/bookings");
     return { success: true, booking };
   } catch (error) {
@@ -127,17 +115,6 @@ export async function updateBookingStatus(id: string, status: string) {
     return { success: true };
   } catch (error) {
     return { success: false };
-  }
-}
-
-export async function getGoogleConnectionStatus() {
-  try {
-    const token = await prisma.googleToken.findUnique({
-      where: { id: "google-token" },
-    });
-    return !!token;
-  } catch (error) {
-    return false;
   }
 }
 // Force redeploy comment
