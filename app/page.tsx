@@ -9,13 +9,14 @@ import LogosSection from "@/components/sections/LogosSection";
 import WhyChooseMeSection from "@/components/sections/WhyChooseMeSection";
 import BookAppointmentSection from "@/components/sections/BookAppointmentSection";
 import Footer from "@/components/Footer";
-import { getUpcomingEvents, getClientLogos, getAvailability } from "@/lib/actions";
+import { getUpcomingEvents, getClientLogos, getAvailability, getBookings } from "@/lib/actions";
 
 export default async function Home() {
-  const [upcomingEvents, clientLogos, availability] = await Promise.all([
+  const [upcomingEvents, clientLogos, availability, bookings] = await Promise.all([
     getUpcomingEvents(),
     getClientLogos(),
-    getAvailability()
+    getAvailability(),
+    getBookings()
   ]);
 
   return (
@@ -29,10 +30,14 @@ export default async function Home() {
       <UpcomingEventsSection initialEvents={upcomingEvents || []} />
       <LogosSection initialLogos={clientLogos || []} />
       <WhyChooseMeSection />
-      <BookAppointmentSection initialAvailability={availability || {}} />
+      <BookAppointmentSection 
+        initialAvailability={availability || {}} 
+        initialBookings={bookings || []}
+      />
       <Footer />
     </div>
   );
 }
+
 
 

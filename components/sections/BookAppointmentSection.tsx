@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { useLocalStorage } from "@/lib/hooks";
+import { useLocalStorage, BookingItem } from "@/lib/hooks";
 import { createBooking } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -25,12 +25,19 @@ const BASE_SLOTS = [
   "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"
 ];
 
-export default function BookAppointmentSection({ initialAvailability = {} }: { initialAvailability?: Record<string, string[]> }) {
+export default function BookAppointmentSection({ 
+  initialAvailability = {},
+  initialBookings = []
+}: { 
+  initialAvailability?: Record<string, string[]>,
+  initialBookings?: BookingItem[]
+}) {
   const [date, setDate] = React.useState<Date | undefined>();
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
   const [selectedTime, setSelectedTime] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [availability, , isClient] = useLocalStorage<Record<string, string[]>>("admin_date_availability", initialAvailability);
+  const [bookings] = React.useState<BookingItem[]>(initialBookings);
 
   const handleDateSelect = (newDate: Date | undefined) => {
     if (newDate) {
@@ -44,13 +51,21 @@ export default function BookAppointmentSection({ initialAvailability = {} }: { i
     if (d.getDay() === 0) return [];
 
     const dateKey = format(d, "yyyy-MM-dd");
+    const dateStr = format(d, "MMM dd, yyyy");
     const customSlots = availability[dateKey];
 
-    // If custom config exists for this date, use it
-    if (customSlots && customSlots.length > 0) return customSlots;
+    // Get candidate slots (from custom config or default BASE_SLOTS)
+    const baseCandidates = (customSlots && customSlots.length > 0) ? customSlots : BASE_SLOTS;
     
-    // Default to 3 PM - 9 PM
-    return BASE_SLOTS;
+    // Filter out already booked slots
+    return baseCandidates.filter(slot => {
+      const isTaken = bookings.some(b => 
+        b.date === dateStr && 
+        b.time === slot && 
+        b.status !== "Cancelled"
+      );
+      return !isTaken;
+    });
   };
 
   const currentSlots = date ? getAvailableSlots(date) : [];
