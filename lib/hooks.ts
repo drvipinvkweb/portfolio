@@ -4,12 +4,10 @@ import { useState, useEffect } from "react";
 
 import { 
   getUpcomingEvents, 
-  getPastSessions, 
   getBookings, 
   getClientLogos, 
   getAvailability,
   syncUpcomingEvents,
-  syncPastSessions,
   syncBookings,
   syncClientLogos,
   syncAvailability
@@ -27,7 +25,6 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       try {
         let dbData = null;
         if (key === "admin_upcoming_events") dbData = await getUpcomingEvents();
-        if (key === "admin_past_sessions") dbData = await getPastSessions();
         if (key === "admin_bookings") dbData = await getBookings();
         if (key === "admin_client_logos") dbData = await getClientLogos();
         if (key === "admin_date_availability") dbData = await getAvailability();
@@ -64,7 +61,6 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       setTimeout(async () => {
         try {
           if (key === "admin_upcoming_events") await syncUpcomingEvents(valueToStore as any);
-          if (key === "admin_past_sessions") await syncPastSessions(valueToStore as any);
           if (key === "admin_bookings") await syncBookings(valueToStore as any);
           if (key === "admin_client_logos") await syncClientLogos(valueToStore as any);
           if (key === "admin_date_availability") await syncAvailability(valueToStore as any);
