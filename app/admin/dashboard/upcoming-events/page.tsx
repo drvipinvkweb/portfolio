@@ -25,7 +25,7 @@ export default function AdminUpcomingEvents() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.title || !formData.date) return;
-    
+
     setEvents((prev) => [
       ...prev,
       {
@@ -45,10 +45,10 @@ export default function AdminUpcomingEvents() {
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if(file) {
+    if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData({...formData, image: reader.result as string});
+        setFormData({ ...formData, image: reader.result as string });
       };
       reader.readAsDataURL(file);
     }
@@ -65,7 +65,7 @@ export default function AdminUpcomingEvents() {
           <h1 className="text-3xl font-bold tracking-tight text-white">Upcoming Events</h1>
           <p className="text-muted-foreground">Manage your future sessions and workshops.</p>
         </div>
-        
+
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
             Add Event
@@ -77,21 +77,21 @@ export default function AdminUpcomingEvents() {
             <form onSubmit={handleSubmit} className="space-y-4 pt-4">
               <div className="space-y-2">
                 <Label>Title</Label>
-                <Input required className="bg-background" value={formData.title || ""} onChange={(e) => setFormData({...formData, title: e.target.value})} />
+                <Input required className="bg-background" value={formData.title || ""} onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Date</Label>
-                  <Input required className="bg-background" placeholder="e.g. Nov 05, 2026" value={formData.date || ""} onChange={(e) => setFormData({...formData, date: e.target.value})} />
+                  <Input required className="bg-background" placeholder="e.g. Nov 05, 2026" value={formData.date || ""} onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
                 </div>
                 <div className="space-y-2">
                   <Label>Time</Label>
-                  <Input className="bg-background" placeholder="e.g. 10:00 AM EST" value={formData.time || ""} onChange={(e) => setFormData({...formData, time: e.target.value})} />
+                  <Input className="bg-background" placeholder="e.g. 10:00 AM EST" value={formData.time || ""} onChange={(e) => setFormData({ ...formData, time: e.target.value })} />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>Location</Label>
-                <Input className="bg-background" value={formData.location || ""} onChange={(e) => setFormData({...formData, location: e.target.value})} />
+                <Input className="bg-background" value={formData.location || ""} onChange={(e) => setFormData({ ...formData, location: e.target.value })} />
               </div>
               <div className="space-y-2">
                 <Label>Image (Select File)</Label>
@@ -99,11 +99,11 @@ export default function AdminUpcomingEvents() {
               </div>
               <div className="space-y-2">
                 <Label>Registration Link (Optional)</Label>
-                <Input className="bg-background" placeholder="https://..." value={formData.registrationLink || ""} onChange={(e) => setFormData({...formData, registrationLink: e.target.value})} />
+                <Input className="bg-background" placeholder="https://..." value={formData.registrationLink || ""} onChange={(e) => setFormData({ ...formData, registrationLink: e.target.value })} />
               </div>
               <div className="space-y-2">
                 <Label>Description</Label>
-                <Textarea className="bg-background" value={formData.description || ""} onChange={(e) => setFormData({...formData, description: e.target.value})} />
+                <Textarea className="bg-background" value={formData.description || ""} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
               </div>
               <Button type="submit" className="w-full">Save Event</Button>
             </form>
@@ -128,10 +128,10 @@ export default function AdminUpcomingEvents() {
                 <TableCell colSpan={5} className="text-center text-muted-foreground">No events found.</TableCell>
               </TableRow>
             ) : events.map((event) => {
-              const absoluteLink = event.registrationLink 
+              const absoluteLink = event.registrationLink
                 ? (event.registrationLink.startsWith('http') ? event.registrationLink : `https://${event.registrationLink}`)
                 : null;
-                
+
               return (
                 <TableRow key={event.id} className="border-[#333] hover:bg-white/5">
                   <TableCell className="font-medium">{event.title}</TableCell>

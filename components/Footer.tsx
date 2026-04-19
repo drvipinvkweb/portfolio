@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Globe } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Instagram, Facebook, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -40,6 +40,36 @@ export default function Footer() {
               <span className="text-sm">+91 9292109404</span>
             </li>
           </ul>
+          
+          <div className="pt-4 flex items-center gap-4">
+            <a 
+              href="https://www.linkedin.com/in/drvipinvk?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="bg-primary/10 p-2.5 rounded-lg text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              title="LinkedIn"
+            >
+              <Linkedin className="w-5 h-5" />
+            </a>
+            <a 
+              href="https://www.instagram.com/vipinvk?igsh=MThoNTRnM29kYThwNQ==" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="bg-primary/10 p-2.5 rounded-lg text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              title="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a 
+              href="https://facebook.com" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="bg-primary/10 p-2.5 rounded-lg text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              title="Facebook"
+            >
+              <Facebook className="w-5 h-5" />
+            </a>
+          </div>
         </div>
 
         <div className="space-y-6">

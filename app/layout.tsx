@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ConstellationBackground from "@/components/ConstellationBackground";
 import SecretTrigger from "@/components/SecretTrigger";
-import SocialSidebar from "@/components/SocialSidebar";
 
 const outfit = Outfit({
   variable: "--font-sans",
@@ -43,7 +42,7 @@ export default function RootLayout({
         <SecretTrigger />
         <ConstellationBackground />
         <Navbar />
-        <SocialSidebar />
+        <Navbar />
         <main className="flex-1 relative z-10 w-full max-w-7xl mx-auto">
           {children}
         </main>
