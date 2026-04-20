@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, Calendar, Search, Users, LogOut, Loader2, Clock } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, LogOut, Loader2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function AdminDashboardLayout({

@@ -62,7 +62,7 @@ export default function WhyChooseMeSection() {
                 }}
                 className="group flex items-center gap-3 text-white font-bold text-lg hover:text-primary transition-colors"
               >
-                Let's discuss your project
+                Let&apos;s discuss your project
                 <Zap className="w-5 h-5 group-hover:fill-primary transition-all" />
               </button>
             </div>

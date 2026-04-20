@@ -22,7 +22,7 @@ export default async function Home() {
   // Type-safe mapping for the front-end
   const upcomingEvents = (rawEvents || []).map(e => ({ ...e, registrationLink: e.registrationLink || undefined }));
   const clientLogos = rawLogos || [];
-  const bookings = (rawBookings || []).map(b => ({ ...b, status: b.status as any }));
+  const bookings = (rawBookings || []).map(b => ({ ...b, status: b.status }));
 
   return (
     <div className="flex flex-col gap-0 pb-0">
