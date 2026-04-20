@@ -35,7 +35,7 @@ export default function Footer() {
         <div className="space-y-6 lg:col-span-1">
           <div className="space-y-2">
             <h3 className="text-2xl font-bold text-white tracking-tight">
-              DR Vipin <span className="text-primary">VK</span>
+              Vipin <span className="text-primary">VK</span>
             </h3>
             <p className="text-primary/60 font-bold text-xs tracking-[0.3em] uppercase">
               Business Consultant
@@ -132,7 +132,7 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <p className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-medium">
-          &copy; {new Date().getFullYear()} DR VIPIN VK. ALL RIGHTS RESERVED.
+          &copy; {new Date().getFullYear()} VIPIN VK. ALL RIGHTS RESERVED.
         </p>
         <div className="flex items-center gap-2">
           <span className="w-8 h-px bg-primary/30" />

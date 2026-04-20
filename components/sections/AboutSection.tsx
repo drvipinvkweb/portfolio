@@ -82,7 +82,7 @@ export default function AboutSection() {
                 className="w-full h-full object-cover object-center scale-110 group-hover:scale-100 transition-transform duration-700"
               />
               <div className="absolute bottom-10 left-10 z-20">
-                <p className="text-3xl font-bold text-white">DR Vipin VK</p>
+                <p className="text-3xl font-bold text-white">Vipin VK</p>
                 <p className="text-primary font-medium tracking-widest uppercase text-sm">Founder & Consultant</p>
               </div>
             </div>
