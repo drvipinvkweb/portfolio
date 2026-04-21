@@ -7,10 +7,22 @@ import { revalidatePath } from "next/cache";
 export async function syncUpcomingEvents(data: any[]) {
   try {
     await prisma.upcomingEvent.deleteMany({});
-    if (data.length > 0) await prisma.upcomingEvent.createMany({ data });
+    
+    const cleanData = data.map((item: any) => ({
+      id: item.id,
+      title: item.title || "",
+      date: item.date || "",
+      time: item.time || "",
+      location: item.location || "",
+      description: item.description || "",
+      image: item.image || "",
+      registrationLink: item.registrationLink || null,
+    }));
+
+    if (cleanData.length > 0) await prisma.upcomingEvent.createMany({ data: cleanData });
     revalidatePath("/");
   } catch (e) {
-    console.error(e);
+    console.error("syncUpcomingEvents Error:", e);
   }
 }
 
@@ -38,10 +50,17 @@ export async function getBookings() {
 export async function syncClientLogos(data: any[]) {
   try {
     await prisma.clientLogo.deleteMany({});
-    if (data.length > 0) await prisma.clientLogo.createMany({ data });
+
+    const cleanData = data.map((item: any) => ({
+      id: item.id,
+      name: item.name || "Logo",
+      image: item.image || "",
+    }));
+
+    if (cleanData.length > 0) await prisma.clientLogo.createMany({ data: cleanData });
     revalidatePath("/");
   } catch (e) {
-    console.error(e);
+    console.error("syncClientLogos Error:", e);
   }
 }
 
