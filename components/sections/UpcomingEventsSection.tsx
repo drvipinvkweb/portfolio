@@ -50,12 +50,12 @@ export default function UpcomingEventsSection({ initialEvents = [] }: { initialE
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <Card className="flex flex-col h-full bg-card/60 backdrop-blur-sm border border-border overflow-hidden transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-2xl">
-              <div className="relative h-48 w-full overflow-hidden">
+              <div className="relative h-48 md:h-56 w-full overflow-hidden bg-black/40">
                 <Image
                   src={event.image}
                   alt={event.title}
                   fill
-                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  className="object-contain transition-transform duration-500 hover:scale-105 p-2"
                 />
                 <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold border border-border text-foreground">
                   Registering Now
