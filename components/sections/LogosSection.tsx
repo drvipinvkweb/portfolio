@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocalStorage, LogoItem } from "@/lib/hooks";
+import { LogoItem } from "@/lib/hooks";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -13,9 +13,9 @@ const defaultLogos: LogoItem[] = [
 ];
 
 export default function LogosSection({ initialLogos = [] }: { initialLogos?: LogoItem[] }) {
-  const [logos, , isClient] = useLocalStorage<LogoItem[]>("admin_client_logos", initialLogos.length > 0 ? initialLogos : defaultLogos);
+  const logos = initialLogos.length > 0 ? initialLogos : defaultLogos;
 
-  if (!isClient || logos.length === 0) return null;
+  if (logos.length === 0) return null;
 
   return (
     <section className="py-24 overflow-hidden border-y border-white/5 bg-black/20">

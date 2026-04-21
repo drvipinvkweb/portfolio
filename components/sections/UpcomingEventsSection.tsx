@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useLocalStorage, EventItem } from "@/lib/hooks";
+import { EventItem } from "@/lib/hooks";
 
 const defaultEvents: EventItem[] = [
   { id: "1", title: "AI in Startups Masterclass", date: "Oct 24, 2026", time: "2:00 PM EST", location: "Virtual (Zoom)", description: "Learn how to leverage generative AI models to accelerate your startup's MVP phase.", image: "/event_poster_1.png" },
@@ -14,9 +14,9 @@ const defaultEvents: EventItem[] = [
 ];
 
 export default function UpcomingEventsSection({ initialEvents = [] }: { initialEvents?: EventItem[] }) {
-  const [upcomingEvents, , isClient] = useLocalStorage<EventItem[]>("admin_upcoming_events", initialEvents.length > 0 ? initialEvents : defaultEvents);
+  const upcomingEvents = initialEvents.length > 0 ? initialEvents : defaultEvents;
 
-  if (!isClient) return <section id="upcoming-events" className="space-y-12 px-6 pt-24 pb-12 min-h-[80vh]" />;
+  if (upcomingEvents.length === 0) return <section id="upcoming-events" className="space-y-12 px-6 pt-24 pb-12 min-h-[80vh]" />;
 
   return (
     <section id="upcoming-events" className="space-y-12 px-6 pt-24 pb-12">
