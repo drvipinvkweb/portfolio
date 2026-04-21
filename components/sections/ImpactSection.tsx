@@ -6,14 +6,14 @@ import { CheckCircle2, TrendingUp, Users, GraduationCap } from "lucide-react";
 const impacts = [
   {
     title: "EdTech Operations",
-    metric: "100+ Schools",
-    description: "Helped an EdTech company streamline operations and scale across 100+ schools regionally.",
+    metric: "130+ Schools",
+    description: "Helped an EdTech company streamline operations and scale across 130+ schools in India and Middle East.",
     icon: <GraduationCap className="w-6 h-6 text-primary" />
   },
   {
     title: "Student Impact",
-    metric: "1000+ Students",
-    description: "Built structured programs impacting over 1000+ students through skill development initiatives.",
+    metric: "3000+ Students",
+    description: "Built structured programs impacting over 3000+ students through skill development initiatives.",
     icon: <Users className="w-6 h-6 text-primary" />
   },
   {
