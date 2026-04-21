@@ -19,15 +19,24 @@ export default function LogosSection({ initialLogos = [] }: { initialLogos?: Log
 
   return (
     <section className="py-24 overflow-hidden border-y border-white/5 bg-black/20">
-      <div className="text-center space-y-4 mb-16 px-6">
+      <div className="text-center space-y-4 mb-16 px-6 max-w-3xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-3xl font-medium tracking-widest uppercase text-muted-foreground"
+          className="text-3xl md:text-4xl font-bold tracking-tight text-white"
         >
-          Trusted by <span className="text-primary font-bold">Industry Leaders</span>
+          Startups Built. Skills Transformed. Futures Shaped.
         </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="text-muted-foreground text-lg"
+        >
+          Mentored and guided multiple startups and skill-driven ventures across domains.
+        </motion.p>
       </div>
 
       <div className="relative w-full flex overflow-hidden group h-24 items-center">
@@ -37,7 +46,7 @@ export default function LogosSection({ initialLogos = [] }: { initialLogos?: Log
 
         <motion.div 
           className="flex gap-16 md:gap-32 w-max px-16 items-center"
-          animate={{ x: ["0%", "-50%"] }}
+          animate={{ x: ["-50%", "0%"] }}
           transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
         >
           {/* Duplicate array to create the seamless infinite scroll loop effect */}
