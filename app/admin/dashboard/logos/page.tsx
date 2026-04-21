@@ -18,35 +18,45 @@ const defaultLogos: LogoItem[] = [
 export default function AdminLogos() {
   const [logos, setLogos, isClient] = useLocalStorage<LogoItem[]>("admin_client_logos", defaultLogos);
   const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState<Partial<LogoItem>>({});
+  const [pendingImages, setPendingImages] = useState<string[]>([]);
 
   if (!isClient) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.image) return;
+    if (pendingImages.length === 0) return;
 
-    setLogos((prev) => [
-      ...prev,
-      {
-        id: Date.now().toString(),
-        name: "Logo",
-        image: formData.image!,
-      }
-    ]);
+    const newLogos = pendingImages.map((img, index) => ({
+      id: Date.now().toString() + "-" + index,
+      name: "Logo",
+      image: img,
+    }));
+
+    setLogos((prev) => [...prev, ...newLogos]);
     setIsOpen(false);
-    setFormData({});
+    setPendingImages([]);
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const newImages: string[] = [];
+    let processed = 0;
+
+    Array.from(files).forEach((file) => {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData({ ...formData, image: reader.result as string });
+        if (reader.result) {
+          newImages.push(reader.result as string);
+        }
+        processed++;
+        if (processed === files.length) {
+          setPendingImages(newImages);
+        }
       };
       reader.readAsDataURL(file);
-    }
+    });
   };
 
   const handleDelete = (id: string) => {
@@ -71,10 +81,13 @@ export default function AdminLogos() {
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 pt-4">
               <div className="space-y-2">
-                <Label>Logo Image (Select File)</Label>
-                <Input type="file" accept="image/*" className="bg-background" onChange={handleImageUpload} />
+                <Label>Logo Image(s) (Select Multiple)</Label>
+                <Input type="file" multiple accept="image/*" className="bg-background" onChange={handleImageUpload} />
+                {pendingImages.length > 0 && (
+                  <p className="text-sm text-muted-foreground">{pendingImages.length} file(s) selected</p>
+                )}
               </div>
-              <Button type="submit" className="w-full">Save Logo</Button>
+              <Button type="submit" className="w-full">Save Logos</Button>
             </form>
           </DialogContent>
         </Dialog>
@@ -90,7 +103,7 @@ export default function AdminLogos() {
               Delete
             </button>
             <div className="h-12 w-full flex items-center justify-center">
-              <img src={logo.image} alt="Logo" className="max-h-full max-w-full object-contain filter brightness-0 invert" />
+              <img src={logo.image} alt="Logo" className="max-h-full max-w-full object-contain" />
             </div>
           </div>
         ))}
