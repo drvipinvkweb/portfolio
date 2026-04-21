@@ -32,8 +32,8 @@ const impacts = [
 
 const stats = [
   { value: "7+", label: "YEARS OF EXPERIENCE" },
-  { value: "15+", label: "STARTUPS CONSULTED" },
-  { value: "20+", label: "BUSINESS VENTURES" },
+  { value: "80+", label: "STARTUPS CONSULTED" },
+  { value: "5+", label: "BUSINESS VENTURES" },
 ];
 
 export default function ImpactSection() {

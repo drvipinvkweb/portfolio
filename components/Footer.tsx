@@ -97,11 +97,14 @@ export default function Footer() {
         <div className="space-y-6">
           <h4 className="text-white font-bold uppercase tracking-widest text-xs">Location & Coverage</h4>
           <ul className="space-y-4">
-            <li className="flex items-center gap-3 text-muted-foreground group">
-              <div className="bg-primary/10 p-2 rounded-lg">
+            <li className="flex items-start gap-3 text-muted-foreground group">
+              <div className="bg-primary/10 p-2 rounded-lg shrink-0 mt-0.5">
                 <MapPin className="w-4 h-4 text-primary" />
               </div>
-              <span className="text-sm">Kochi, Kerala</span>
+              <span className="text-sm leading-relaxed">
+                36/267, Ground Floor, Mannath Building, Seaport-Airport Road<br />
+                Thrikkakara PO, Ernakulam - 682021
+              </span>
             </li>
             <li className="flex items-center gap-3 text-muted-foreground group">
               <div className="bg-primary/10 p-2 rounded-lg">
