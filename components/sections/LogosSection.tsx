@@ -55,7 +55,7 @@ export default function LogosSection({ initialLogos = [] }: { initialLogos?: Log
               <img 
                 src={logo.image} 
                 alt="Client Logo" 
-                className="w-full h-full object-contain filter brightness-0 invert opacity-60 group-hover/logo:filter-none group-hover/logo:opacity-100 transition-all duration-500"
+                className="w-full h-full object-contain grayscale opacity-60 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 transition-all duration-500"
               />
             </div>
           ))}
