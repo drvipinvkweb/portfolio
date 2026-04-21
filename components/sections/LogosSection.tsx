@@ -39,23 +39,23 @@ export default function LogosSection({ initialLogos = [] }: { initialLogos?: Log
         </motion.p>
       </div>
 
-      <div className="relative w-full flex overflow-hidden group h-24 items-center">
+      <div className="relative w-full flex overflow-hidden group py-10 items-center">
         {/* Fading Edges */}
         <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
         <motion.div 
-          className="flex gap-16 md:gap-32 w-max px-16 items-center"
+          className="flex gap-16 md:gap-24 w-max px-16 items-center"
           animate={{ x: ["-50%", "0%"] }}
           transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
         >
           {/* Duplicate array to create the seamless infinite scroll loop effect */}
           {[...logos, ...logos].map((logo, index) => (
-            <div key={`${logo.id}-${index}`} className="flex-shrink-0 flex items-center justify-center transition-all duration-300">
+            <div key={`${logo.id}-${index}`} className="flex-shrink-0 flex items-center justify-center transition-all duration-300 bg-white/95 rounded-2xl p-4 md:p-6 w-36 h-20 md:w-48 md:h-28 shadow-xl hover:shadow-2xl hover:-translate-y-1">
               <img 
                 src={logo.image} 
                 alt="Client Logo" 
-                className="h-8 md:h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                className="w-full h-full object-contain mix-blend-multiply"
               />
             </div>
           ))}
