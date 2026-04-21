@@ -3,10 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SecretTrigger from "@/components/SecretTrigger";
-import dynamic from "next/dynamic";
-
-const ConstellationBackground = dynamic(() => import("@/components/ConstellationBackground"), { ssr: false });
-
+import ConstellationWrapper from "@/components/ConstellationWrapper";
 
 const outfit = Outfit({
   variable: "--font-sans",
@@ -43,7 +40,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <SecretTrigger />
-        <ConstellationBackground />
+        <ConstellationWrapper />
         <Navbar />
         <main className="flex-1 relative z-10 w-full max-w-7xl mx-auto">
           {children}
