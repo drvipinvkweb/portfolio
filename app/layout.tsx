@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import ConstellationBackground from "@/components/ConstellationBackground";
 import SecretTrigger from "@/components/SecretTrigger";
+import dynamic from "next/dynamic";
+
+const ConstellationBackground = dynamic(() => import("@/components/ConstellationBackground"), { ssr: false });
+
 
 const outfit = Outfit({
   variable: "--font-sans",

@@ -11,6 +11,8 @@ import BookAppointmentSection from "@/components/sections/BookAppointmentSection
 import Footer from "@/components/Footer";
 import { getUpcomingEvents, getClientLogos, getAvailability, getBookings } from "@/lib/actions";
 
+export const revalidate = 60; // 1 minute revalidation for ISR
+
 export default async function Home() {
   const [rawEvents, rawLogos, availability, rawBookings] = await Promise.all([
     getUpcomingEvents(),
