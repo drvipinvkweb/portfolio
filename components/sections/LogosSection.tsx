@@ -51,7 +51,7 @@ export default function LogosSection({ initialLogos = [] }: { initialLogos?: Log
         >
           {/* Duplicate array to create the seamless infinite scroll loop effect */}
           {[...logos, ...logos].map((logo, index) => (
-            <div key={`${logo.id}-${index}`} className="flex-shrink-0 flex items-center justify-center transition-all duration-500 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 w-36 h-20 md:w-48 md:h-28 shadow-xl hover:bg-white/10 hover:border-white/20 hover:shadow-2xl hover:-translate-y-1 group/logo">
+            <div key={`${logo.id}-${index}`} className="flex-shrink-0 flex items-center justify-center transition-all duration-500 bg-card/80 backdrop-blur-md border border-border/40 rounded-2xl p-4 md:p-6 w-36 h-20 md:w-48 md:h-28 shadow-[0_4px_30px_rgba(0,0,0,0.5)] hover:bg-card hover:border-border/60 hover:shadow-2xl hover:-translate-y-1 group/logo">
               <img 
                 src={logo.image} 
                 alt="Client Logo" 
