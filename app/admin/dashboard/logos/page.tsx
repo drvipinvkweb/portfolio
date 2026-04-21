@@ -24,13 +24,13 @@ export default function AdminLogos() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.image) return;
+    if (!formData.image) return;
 
     setLogos((prev) => [
       ...prev,
       {
         id: Date.now().toString(),
-        name: formData.name!,
+        name: "Logo",
         image: formData.image!,
       }
     ]);
@@ -71,10 +71,6 @@ export default function AdminLogos() {
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 pt-4">
               <div className="space-y-2">
-                <Label>Company Name</Label>
-                <Input required className="bg-background" value={formData.name || ""} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
-              </div>
-              <div className="space-y-2">
                 <Label>Logo Image (Select File)</Label>
                 <Input type="file" accept="image/*" className="bg-background" onChange={handleImageUpload} />
               </div>
@@ -94,9 +90,8 @@ export default function AdminLogos() {
               Delete
             </button>
             <div className="h-12 w-full flex items-center justify-center">
-              <img src={logo.image} alt={logo.name} className="max-h-full max-w-full object-contain filter brightness-0 invert" />
+              <img src={logo.image} alt="Logo" className="max-h-full max-w-full object-contain filter brightness-0 invert" />
             </div>
-            <p className="text-xs text-neutral-400 font-semibold uppercase tracking-wider">{logo.name}</p>
           </div>
         ))}
         {logos.length === 0 && (
