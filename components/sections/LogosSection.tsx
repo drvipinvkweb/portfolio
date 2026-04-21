@@ -47,15 +47,15 @@ export default function LogosSection({ initialLogos = [] }: { initialLogos?: Log
         <motion.div 
           className="flex gap-16 md:gap-24 w-max px-16 items-center"
           animate={{ x: ["-50%", "0%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 60 }}
         >
           {/* Duplicate array to create the seamless infinite scroll loop effect */}
           {[...logos, ...logos].map((logo, index) => (
-            <div key={`${logo.id}-${index}`} className="flex-shrink-0 flex items-center justify-center transition-all duration-300 bg-white/95 rounded-2xl p-4 md:p-6 w-36 h-20 md:w-48 md:h-28 shadow-xl hover:shadow-2xl hover:-translate-y-1">
+            <div key={`${logo.id}-${index}`} className="flex-shrink-0 flex items-center justify-center transition-all duration-500 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 w-36 h-20 md:w-48 md:h-28 shadow-xl hover:bg-white/10 hover:border-white/20 hover:shadow-2xl hover:-translate-y-1 group/logo">
               <img 
                 src={logo.image} 
                 alt="Client Logo" 
-                className="w-full h-full object-contain mix-blend-multiply"
+                className="w-full h-full object-contain filter brightness-0 invert opacity-60 group-hover/logo:filter-none group-hover/logo:opacity-100 transition-all duration-500"
               />
             </div>
           ))}

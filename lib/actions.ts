@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function syncUpcomingEvents(data: any[]) {
   try {
     await prisma.upcomingEvent.deleteMany({});
-    
+
     const cleanData = data.map((item: any) => ({
       id: item.id,
       title: item.title || "",
@@ -27,7 +27,7 @@ export async function syncUpcomingEvents(data: any[]) {
 }
 
 export async function getUpcomingEvents() {
-  try { return await prisma.upcomingEvent.findMany({ orderBy: { createdAt: 'desc' } }); } 
+  try { return await prisma.upcomingEvent.findMany({ orderBy: { createdAt: 'desc' } }); }
   catch (e) { return []; }
 }
 
@@ -43,7 +43,7 @@ export async function syncBookings(data: any[]) {
 }
 
 export async function getBookings() {
-  try { return await prisma.booking.findMany({ orderBy: { createdAt: 'desc' } }); } 
+  try { return await prisma.booking.findMany({ orderBy: { createdAt: 'desc' } }); }
   catch (e) { return []; }
 }
 
@@ -65,7 +65,7 @@ export async function syncClientLogos(data: any[]) {
 }
 
 export async function getClientLogos() {
-  try { return await prisma.clientLogo.findMany({ orderBy: { createdAt: 'desc' } }); } 
+  try { return await prisma.clientLogo.findMany({ orderBy: { createdAt: 'desc' } }); }
   catch (e) { return []; }
 }
 

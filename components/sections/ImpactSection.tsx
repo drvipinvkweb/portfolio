@@ -12,8 +12,8 @@ const impacts = [
   },
   {
     title: "Student Impact",
-    metric: "3000+ Students",
-    description: "Built structured programs impacting over 3000+ students through skill development initiatives.",
+    metric: "5000+ Students",
+    description: "Built structured programs impacting over 5000+ students through skill development initiatives.",
     icon: <Users className="w-6 h-6 text-primary" />
   },
   {
